@@ -1,0 +1,87 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import DrawerNavigator from '../components/DrawerNavigation/DrawerNavigation';
+import AppointmentScreen from '../screens/AppointmentScreen/AppointmentScreen';
+import LoginPage from '../screens/Auth/Login';
+import LoginAndRegister from '../screens/Auth/LoginAndRegister/LoginAndRegister';
+import RegisterPage from '../screens/Auth/Register';
+import BookAmbulanceScreen from '../screens/BookAmbulanceScreen/BookAmbulanceScreen';
+import ConsultancyScreen from '../screens/ConsultancyScreen/ConsultancyScreen';
+import OrderMedicinesScreen from '../screens/OrderMedicinesScreen/OrderMedicinesScreen';
+import { login } from '../slices/authSlice';
+const Stack = createNativeStackNavigator();
+
+export default function Navigation() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const userEmail = await AsyncStorage.getItem('userEmail');
+      const userToken = await AsyncStorage.getItem('userToken');
+
+      if (userEmail && userToken) {
+        dispatch(login({ email: userEmail, token: userToken }));
+      }
+    };
+
+    checkToken();
+  }, [dispatch]);
+
+  const token = useSelector((state) => state.auth.token);
+  console.log(token);
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName="DrawerNavigator"
+      >
+        {token ? (
+          <>
+            <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+
+            <Stack.Screen
+              name="AppointmentScreen"
+              component={AppointmentScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="ConsultancyScreen"
+              component={ConsultancyScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="OrderMedicinesScreen"
+              component={OrderMedicinesScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="BookAmbulanceScreen"
+              component={BookAmbulanceScreen}
+              options={{ headerShown: true }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="LoginAndRegister"
+              component={LoginAndRegister}
+            />
+            <Stack.Screen name="Register" component={RegisterPage} />
+            <Stack.Screen name="Login">
+              {(props) => (
+                <LoginPage
+                  {...props}
+                  onLogin={() => setIsAuthenticated(true)}
+                />
+              )}
+            </Stack.Screen>
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
