@@ -11,8 +11,8 @@ import {
   View,
 } from 'react-native';
 import * as Icon from 'react-native-feather';
-import { url } from '../../config/environment';
 import styles from './OrderMedicinesScreen.style';
+
 const OrderMedicinesScreen = () => {
   // const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
@@ -85,33 +85,33 @@ const OrderMedicinesScreen = () => {
     //   image: image,
     // };
     console.log(imageFormData);
-    try {
-      console.log('Sending request to:', `${url}/api/orders/`);
-      console.log('Request body:', imageFormData);
+    // try {
+    //   console.log('Sending request to:', `${url}/api/orders/`);
+    //   console.log('Request body:', imageFormData);
 
-      // Make the API request
-      const response = await fetch(`${url}/api/orders/orderMedicine`, {
-        method: 'POST',
-        body: imageFormData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+    //   // Make the API request
+    //   const response = await fetch(`${url}/api/orders/orderMedicine`, {
+    //     method: 'POST',
+    //     body: imageFormData,
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   });
 
-      console.log('Response status:', response.status);
+    //   console.log('Response status:', response.status);
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Response data:', responseData);
-        alert('Medicine ordered successfully');
-      } else {
-        console.log('Error response:', response);
-        alert('Error ordering medicine');
-      }
-    } catch (error) {
-      console.error('Request failed:', error);
-      alert('Failed to order medicine');
-    }
+    //   if (response.ok) {
+    //     const responseData = await response.json();
+    //     console.log('Response data:', responseData);
+    //     alert('Medicine ordered successfully');
+    //   } else {
+    //     console.log('Error response:', response);
+    //     alert('Error ordering medicine');
+    //   }
+    // } catch (error) {
+    //   console.error('Request failed:', error);
+    //   alert('Failed to order medicine');
+    // }
   };
 
   return (
@@ -137,12 +137,8 @@ const OrderMedicinesScreen = () => {
             Max file size: 5MB
           </Text>
         </TouchableOpacity>
-        {formData?.image?.uri && (
-          <Image
-            key={formData.image.uri}
-            source={{ uri: formData?.image?.uri }}
-            style={styles.image}
-          />
+        {formData.image && (
+          <Image source={{ uri: formData.image }} style={styles.image} />
         )}
         <Text style={[styles.text, { fontWeight: 'bold' }]}>
           Prescription Details

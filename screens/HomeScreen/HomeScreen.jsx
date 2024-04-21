@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { View } from 'react-native';
+import { Linking, TouchableOpacity, View } from 'react-native';
+import * as Icon from 'react-native-feather';
 import {
   AmbulanceImage,
   MaleDoctorOne,
@@ -9,17 +10,34 @@ import {
 } from '../../assets';
 import HorizontalHomePageCard from '../../components/HorizontalHomePageCard/HorizontalHomePageCard';
 import VerticalHomePageCard from '../../components/VerticalHomePageCard/VerticalHomePageCard';
+import { hospitalPhoneNumber } from '../../constants';
 import styles from './HomeScreen.style';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const callToHospital = () => {
+    // const phoneNumber = '+923010773586'; // Replace with the desired phone number
+    const url = `tel:${hospitalPhoneNumber}`;
+
+    Linking.openURL(url)
+      .then((result) => {
+        if (result) {
+          console.log('Phone call opened successfully');
+        } else {
+          console.log('Phone call could not be opened');
+        }
+      })
+      .catch((error) => {
+        console.error('Error opening phone call:', error);
+      });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.mainCard}>
         <VerticalHomePageCard
           image={MaleDoctorOne}
           title="Book Appointment"
-          navigateScreen="AppointmentScreen"
+          navigateScreen="Book Appointment"
         />
         <VerticalHomePageCard
           image={MaleDoctorTwo}
@@ -29,7 +47,7 @@ const HomeScreen = () => {
         <HorizontalHomePageCard
           Image={MedicansImage}
           title="Book Medicines"
-          navigateScreen="OrderMedicinesScreen"
+          navigateScreen="Order Medicines"
         />
         <HorizontalHomePageCard
           Image={AmbulanceImage}
@@ -37,6 +55,9 @@ const HomeScreen = () => {
           navigateScreen="BookAmbulanceScreen"
         />
       </View>
+      <TouchableOpacity style={styles.callButton} onPress={callToHospital}>
+        <Icon.Phone color="#fff" />
+      </TouchableOpacity>
     </View>
   );
 };

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { themeColors } from '../../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +32,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     color: '#fff',
+  },
+  callButton: {
+    position: 'fixed',
+    top: 70,
+    right: 60,
+    left: '86%',
+    backgroundColor: themeColors.bgColor(1),
+    padding: 10,
+    width: 42,
+    borderRadius: 10,
   },
 });
 

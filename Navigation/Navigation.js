@@ -9,7 +9,7 @@ import LoginPage from '../screens/Auth/Login';
 import LoginAndRegister from '../screens/Auth/LoginAndRegister/LoginAndRegister';
 import RegisterPage from '../screens/Auth/Register';
 import BookAmbulanceScreen from '../screens/BookAmbulanceScreen/BookAmbulanceScreen';
-import ConsultancyScreen from '../screens/ConsultancyScreen/ConsultancyScreen';
+import ChatBoot from '../screens/ChatBoot/ChatBoot';
 import OrderMedicinesScreen from '../screens/OrderMedicinesScreen/OrderMedicinesScreen';
 import { login } from '../slices/authSlice';
 const Stack = createNativeStackNavigator();
@@ -44,17 +44,21 @@ export default function Navigation() {
             <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
 
             <Stack.Screen
-              name="AppointmentScreen"
+              name="Book Appointment"
               component={AppointmentScreen}
-              options={{ headerShown: true }}
+              options={{
+                headerShown: true,
+                headerBackTitle: 'Custom Back',
+                headerBackTitleStyle: { fontSize: 30 },
+              }}
             />
             <Stack.Screen
               name="ConsultancyScreen"
-              component={ConsultancyScreen}
+              component={ChatBoot}
               options={{ headerShown: true }}
             />
             <Stack.Screen
-              name="OrderMedicinesScreen"
+              name="Order Medicines"
               component={OrderMedicinesScreen}
               options={{ headerShown: true }}
             />

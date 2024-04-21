@@ -18,7 +18,9 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${url}/api/users/current/${userEmail}`);
+        const response = await fetch(
+          `${url}/api/customers/current/${userEmail}`
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
