@@ -39,9 +39,6 @@ function usePost(url) {
   const postData = async (postData) => {
     setIsLoading(true);
     try {
-      console.log('Request URL:', url);
-      console.log('Request Data:', postData);
-
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -50,8 +47,6 @@ function usePost(url) {
         },
         body: JSON.stringify(postData),
       });
-
-      console.log('Response Status:', response.status);
 
       if (!response.ok) {
         const errorMessage = await response.text();
@@ -62,10 +57,8 @@ function usePost(url) {
 
       setIsLoading(false);
       const responseData = await response.json();
-      console.log('Response Data:', responseData);
       return responseData;
     } catch (error) {
-      console.error('Error:', error);
       setError(error);
       setIsLoading(false);
       throw error;

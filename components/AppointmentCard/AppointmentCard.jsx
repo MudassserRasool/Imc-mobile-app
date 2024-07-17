@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { url } from '../../config/environment';
 import { currency } from '../../constants';
@@ -8,8 +9,7 @@ import styles from './AppointmentCard.style';
 
 const AppointmentCard = ({ data }) => {
   const profile = useSelector((state) => state.auth.profile);
-  // console.log(profile.name + '-------------------');
-  // console.log(data);
+
   const {
     postData: postRequest,
     isLoading,
@@ -21,19 +21,13 @@ const AppointmentCard = ({ data }) => {
     phone: profile?.phone,
   };
   const handlePost = async () => {
-    console.log('----------------------------------------------------');
-    console.log('----------------------------------------------------');
-    console.log('----------------------------------------------------');
-    console.log('----------------------------------------------------');
-    console.log(appointmentData);
     try {
       const response = await postRequest(appointmentData);
-      console.log('Response:', response);
+      alert('Appointment Booked Successfully');
     } catch (error) {
-      console.error('Error:', error);
+      alert('Error booking appointment');
     }
   };
-  console.log(data);
   return (
     <View style={styles.cardBody}>
       {/* <View>

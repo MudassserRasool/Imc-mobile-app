@@ -3,7 +3,7 @@ import * as Location from 'expo-location';
 export async function getLocationUrl() {
   let { status } = await Location.requestForegroundPermissionsAsync();
   if (status !== 'granted') {
-    console.error('Permission to access location was denied');
+    alert('Permission to access location was denied');
     return;
   }
 

@@ -77,18 +77,8 @@ const OrderMedicinesScreen = () => {
     imageFormData.append('name', formData?.name);
     imageFormData.append('address', formData?.address);
     imageFormData.append('phone', formData?.phone);
-    // Prepare request body
-    // const requestBody = {
-    //   name: name,
-    //   phone: phone,
-    //   address: address,
-    //   image: image,
-    // };
-    console.log(imageFormData);
-    try {
-      console.log('Sending request to:', `${url}/api/orders/`);
-      console.log('Request body:', imageFormData);
 
+    try {
       // Make the API request
       const response = await fetch(`${url}/api/orders/orderMedicine`, {
         method: 'POST',
@@ -98,18 +88,13 @@ const OrderMedicinesScreen = () => {
         },
       });
 
-      console.log('Response status:', response.status);
-
       if (response.ok) {
         const responseData = await response.json();
-        console.log('Response data:', responseData);
         alert('Medicine ordered successfully');
       } else {
-        console.log('Error response:', response);
         alert('Error ordering medicine');
       }
     } catch (error) {
-      console.error('Request failed:', error);
       alert('Failed to order medicine');
     }
   };

@@ -31,7 +31,6 @@ export default function Navigation() {
   }, [dispatch]);
 
   const token = useSelector((state) => state.auth.token);
-  console.log(token);
 
   return (
     <NavigationContainer>
@@ -55,7 +54,10 @@ export default function Navigation() {
             <Stack.Screen
               name="ConsultancyScreen"
               component={ChatBoot}
-              options={{ headerShown: true }}
+              options={{
+                headerShown: true,
+                title: 'Consultancy Chat', // Set the display name here
+              }}
             />
             <Stack.Screen
               name="Order Medicines"

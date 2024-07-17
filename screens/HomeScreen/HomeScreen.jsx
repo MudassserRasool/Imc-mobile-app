@@ -22,13 +22,13 @@ const HomeScreen = () => {
     Linking.openURL(url)
       .then((result) => {
         if (result) {
-          console.log('Phone call opened successfully');
+          alert('Phone call opened successfully');
         } else {
-          console.log('Phone call could not be opened');
+          alert('Phone call could not be opened');
         }
       })
       .catch((error) => {
-        console.error('Error opening phone call:', error);
+        alert('Error opening phone call', error);
       });
   };
   return (

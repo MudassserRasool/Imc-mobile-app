@@ -33,11 +33,6 @@ function RegisterPage({ props }) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  // console.log(
-  //   // JSON.stringify(location.address) + '-------------------------adress'
-  // );
-  // console.log(homeAddress);
-  // setaddress(homeAddress);
   const handelSubmit = async () => {
     // check if name is empty then return
 
@@ -57,7 +52,6 @@ function RegisterPage({ props }) {
       email,
       password,
     };
-    console.log(userData);
     try {
       const response = await fetch(`${url}/api/customers/registerCustomer`, {
         method: 'POST',
@@ -70,15 +64,12 @@ function RegisterPage({ props }) {
       const json = await response.json();
 
       if (!response.ok) {
-        console.error('not ok' + json.message || 'Unknown error');
         setmainError(json.message);
       } else {
         dispatch(register({ email: json.email, token: json.token }));
         setmainError('Secuessfully Registered');
-        console.log('scuessfully registered');
       }
     } catch (error) {
-      console.error(error.message || 'Unknown error');
       setmainError('Network Error');
     } finally {
       setIsLoading(false); // Reset loading state regardless of success or failure

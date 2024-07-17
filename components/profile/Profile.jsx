@@ -26,14 +26,9 @@ const Profile = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const json = await response.json();
-        // console.log(json);
         dispatch(setProfile(json));
-        console.log('------------------------------------------');
-        console.log(name, email, address, phone);
-        console.log('------------------------------------------');
-        console.log('scuessfully fetched profile' + json);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        alert('Error fetching data');
       }
     };
     fetchProfile();
@@ -60,7 +55,6 @@ const Profile = () => {
     );
   };
   const token = useSelector((state) => state.auth.token);
-  console.log(token, typeof token);
   return (
     <View style={styles.container}>
       <View>
@@ -132,23 +126,11 @@ const Profile = () => {
               <View style={styles.sectionInner}>
                 <TouchableOpacity style={styles.itemRow} onPress={handleLogout}>
                   <Icon.LogOut
-                    style={{ color: 'white' }}
+                    style={{ color: 'red' }}
                     height={icons.height}
                     width={icons.width}
                   />
-                  <Text style={{ color: 'white' }}>Logout</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.itemRow}
-                  onPress={() => navigation.navigate('OrderHistory')}
-                >
-                  <Icon.ShoppingBag
-                    style={{ color: 'green' }}
-                    height={icons.height}
-                    width={icons.width}
-                  />
-                  <Text>My Orders</Text>
+                  <Text style={{ color: 'red' }}>Logout</Text>
                 </TouchableOpacity>
               </View>
             </View>

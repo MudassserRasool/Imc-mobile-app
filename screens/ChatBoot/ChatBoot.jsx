@@ -88,10 +88,10 @@ const ChatBoot = () => {
 
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       } else {
-        console.error('Unexpected API response:', data);
+        alert('Unexpected API response:', data);
       }
     } catch (error) {
-      console.error('Error fetching AI response:', error);
+      alert('Error fetching AI response:', error);
     } finally {
       setLoading(false);
       setUserMessage('');

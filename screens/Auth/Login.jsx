@@ -44,14 +44,11 @@ function LoginPage({ props }) {
       if (!response.ok) {
         setMainError(json.message);
       } else {
-        console.log('you have scuessfully login');
+        alert('you have scuessfully login');
         dispatch(login({ email: userData.email, token: json.token }));
       }
     } catch (error) {
-      console.error(
-        'catch section An unexpected error occurred:',
-        error.message || 'Unknown error'
-      );
+      alert('Error logging in', error.message);
       setMainError(error.message || 'Unknown error');
     } finally {
       setLoading(false);

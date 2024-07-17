@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
       if (itemIndex >= 0) {
         newCart.splice(itemIndex, 1);
       } else {
-        console.log("can't remove item as its not in the basket");
+        alert("can't remove item as its not in the basket");
       }
       state.items = newCart;
     },
